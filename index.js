@@ -194,10 +194,7 @@ const pkg = getPackageJson();
     }
 
     // now go to the actual branch to perform the same versioning
-    if (isPullRequest) {
-      // First fetch to get updated local version of branch
-      await runInWorkspace('git', ['fetch']);
-    }
+    await runInWorkspace('git', ['fetch']);
     await runInWorkspace('git', ['checkout', currentBranch]);
     await runInWorkspace('npm', ['version', '--allow-same-version=true', '--git-tag-version=false', current]);
     console.log('current 2:', current, '/', 'version:', version);
